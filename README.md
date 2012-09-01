@@ -1,7 +1,7 @@
 nvote
 =====
 
-Realtime voting app base on Node.js
+Realtime voting app based on Node.js
 =======
 
 Installation
