@@ -35,6 +35,9 @@ If you are going to install the node_modules locally then append them into the N
 
 Usage
 =====
+
 ```
+cd nvote
+npm install -g (or)  npm install
 coffee app.coffee
 ```
