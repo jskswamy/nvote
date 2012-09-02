@@ -13,5 +13,5 @@ namespace 'db', ->
     sequelize.drop()
 
   desc 'reset database'
-  task 'rest', (param) ->
+  task 'reset', (param) ->
     sequelize.sync({force: true})
