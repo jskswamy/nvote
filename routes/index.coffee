@@ -1,8 +1,6 @@
+vote = require('../models/vote')
 
-#
-# * GET home page.
-# 
 exports.index = (req, res) ->
   res.render "index",
-    title: "Express"
+    title: "Vote"
 

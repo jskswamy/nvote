@@ -13,3 +13,6 @@ exports.build = (params) ->
 
 exports.create = (params) ->
   Vote.create(params)
+
+exports.get_trending_votes = (fn) ->
+  Vote.findAll({limit: 100, order: 'id DESC'}).success(fn)

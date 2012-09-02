@@ -26,6 +26,7 @@ app.configure "development", ->
 
 app.get "/", routes.index
 app.get "/cast/:mood", cast.index
+app.get "/trend", cast.trend
 
 http.createServer(app).listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")
