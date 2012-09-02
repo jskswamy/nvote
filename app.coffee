@@ -4,6 +4,7 @@ Module dependencies.
 ###
 express = require("express")
 routes = require("./routes")
+cast = require("./routes/cast")
 http = require("http")
 path = require("path")
 vote = require("./models/vote")
@@ -24,6 +25,7 @@ app.configure "development", ->
   app.use express.errorHandler()
 
 app.get "/", routes.index
+app.get "/cast/:mood", cast.index
+
 http.createServer(app).listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")
-
