@@ -1,5 +1,8 @@
 extends layout
 
+block scripts
+  script(type='text/javascript', src='/javascripts/d3.v2.min.js')
+  script(type='text/javascript', src='/javascripts/app.js')
+
 block content
-  h1= title
-  p Welcome to #{title}
+  div.pie_chart
