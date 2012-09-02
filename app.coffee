@@ -7,7 +7,9 @@ routes = require("./routes")
 user = require("./routes/user")
 http = require("http")
 path = require("path")
+vote = require("./models/vote")
 app = express()
+
 app.configure ->
   app.set "port", process.env.PORT or 3000
   app.set "views", __dirname + "/views"
