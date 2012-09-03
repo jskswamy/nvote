@@ -1,7 +1,7 @@
 var pieHandler = null;
 
 $(function() {
-  PieChart.init([100,200]);
+  PieChart.init([1,1]);
   setInterval(refreshData, 5000);
 });
 
@@ -21,7 +21,7 @@ var PieChart = {
       .attr("width", this.w)
       .attr("height", this.h)
       .append("svg:g")
-      .attr("transform", "translate(" + this.w / 2 + "," + this.h / 2 + ")");
+      .attr("transform", "translate(" + 231 + "," + 231 + ")");
     return svg;
   },
   _drawPie: function(data) {
