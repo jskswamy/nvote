@@ -2,7 +2,7 @@ var pieHandler = null;
 
 $(function() {
   PieChart.init([1,1]);
-  setInterval(refreshData, 5000);
+  refresh();
 });
 
 var PieChart = {
@@ -39,6 +39,13 @@ var PieChart = {
 
 function refreshData() {
   $.getJSON('/trend', updateGraph);
+}
+
+function refresh() {
+  var socket = io.connect('http://localhost:3000');
+  socket.on('votes', function (data) {
+    updateGraph(data);
+  });
 }
 
 function updateGraph(data) {

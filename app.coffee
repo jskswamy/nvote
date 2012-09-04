@@ -24,9 +24,18 @@ app.configure ->
 app.configure "development", ->
   app.use express.errorHandler()
 
+server = http.createServer(app)
+io = require("socket.io").listen(server)
+
 app.get "/", routes.index
 app.get "/cast/:mood", cast.index
 app.get "/trend", cast.trend
 
-http.createServer(app).listen app.get("port"), ->
+server.listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")
+
+io.sockets.on('connection', (socket) ->
+  cast.register_cast_callback((votes) ->
+    socket.emit('votes', votes)
+  )
+)
