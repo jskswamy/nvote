@@ -1,7 +1,3 @@
-
-###
-Module dependencies.
-###
 express = require("express")
 routes = require("./routes")
 cast = require("./routes/cast")
@@ -27,6 +23,7 @@ app.configure "development", ->
 server = http.createServer(app)
 io = require("socket.io").listen(server)
 
+
 app.get "/", routes.index
 app.get "/cast/:mood", cast.index
 app.get "/trend", cast.trend
@@ -35,7 +32,7 @@ server.listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")
 
 io.sockets.on('connection', (socket) ->
-  cast.register_cast_callback((votes) ->
+  vote.on('created', (votes) ->
     socket.emit('votes', votes)
   )
 )

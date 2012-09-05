@@ -2,7 +2,7 @@ var pieHandler = null;
 
 $(function() {
   PieChart.init([1,1]);
-  refresh();
+  bindRefresh();
 });
 
 var PieChart = {
@@ -37,20 +37,14 @@ var PieChart = {
   }
 };
 
-function refreshData() {
-  $.getJSON('/trend', updateGraph);
-}
-
-function refresh() {
+function bindRefresh() {
   var socket = io.connect('http://localhost:3000');
-  socket.on('votes', function (data) {
-    updateGraph(data);
-  });
+  socket.on('votes', updateGraph);
 }
 
 function updateGraph(data) {
   var plusOne = 0, minusOne = 0;
-  $(data.votes).each(function(index, vote) {
+  $(data).each(function(index, vote) {
     if (vote.mood) plusOne++;
     else minusOne++;
   });
