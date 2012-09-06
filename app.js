@@ -33,7 +33,9 @@ server.listen(app.get("port"), function() {
 });
 
 io.sockets.on('connection', function(socket) {
-  return vote.on('created', function(votes) {
-    return socket.emit('votes', votes);
+  return vote.on('created', function() {
+    vote.get_trending_votes(function(votes) {
+      return socket.emit('votes', votes);
+    });
   });
 });

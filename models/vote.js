@@ -19,16 +19,12 @@ exports.build = function(params) {
 
 exports.create = function(params) {
   Vote.create(params);
-  return get_trending_votes(function(votes) {
-    return eventEmitter.emit('created', votes);
-  });
+  return eventEmitter.emit('created');
 };
 
-get_trending_votes = function(fn) {
+exports.get_trending_votes = function(fn) {
   return Vote.findAll({
     limit: 100,
          order: 'id DESC'
   }).success(fn);
 };
-
-exports.get_trending_votes = get_trending_votes;
