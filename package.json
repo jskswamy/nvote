@@ -8,9 +8,9 @@
   "dependencies": {
     "express": "3.0.0rc4",
     "jade": "*",
-    "sequelize": "*"
-    "jake": "*"
-    "supervisor": "*"
+    "sequelize": "*",
+    "jake": "*",
+    "supervisor": "*",
     "socket": "*"
   }
 }
