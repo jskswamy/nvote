@@ -1,6 +1,5 @@
 var express = require("express"),
     routes = require("./routes"),
-    cast = require("./routes/cast"),
     http = require("http"),
     path = require("path"),
     vote = require("./models/vote"),
@@ -25,8 +24,9 @@ app.configure("development", function() {
 });
 
 app.get("/", routes.index);
-app.get("/cast/:mood", cast.index);
-app.get("/trend", cast.trend);
+app.get("/cast/:mood", routes.cast.index);
+app.get("/trend", routes.cast.trend);
+app.get("/survey",routes.survey.index);
 
 server.listen(app.get("port"), function() {
   return console.log("Express server listening on port " + app.get("port"));
@@ -41,4 +41,4 @@ var emitVotes = function() {
   vote.get_trending_votes(function(votes) {
     return this.emit('votes', votes);
   }.bind(this));
-}
+};

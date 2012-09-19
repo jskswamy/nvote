@@ -5,3 +5,6 @@ exports.index = function(req, res) {
     title: "Vote"
   });
 };
+
+exports.cast = require('./cast');
+exports.survey = require('./survey');

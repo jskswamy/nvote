@@ -1,0 +1,10 @@
+extends ../layout
+
+block scripts
+  script(type='text/javascript', src='/socket.io/socket.io.js')
+  script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+  script(type='text/javascript', src='/javascripts/d3.v2.min.js')
+
+block content
+  h1 People's Mood
+  div.pie_chart

@@ -3,7 +3,14 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.min.css')
     script(type='text/javascript', src='/javascripts/jquery-1.8.0.min.js')
+    script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+
     block scripts
+
   body
-    block content
+    div.container-fluid
+      div.row-fluid
+        block content

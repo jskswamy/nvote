@@ -11,8 +11,7 @@ exports.index = function(req, res) {
 };
 
 exports.trend = function(req, res) {
-  var votes;
-  return votes = vote.get_trending_votes(function(votes) {
+  return vote.get_trending_votes(function(votes) {
     return res.json({
       votes: votes
     });
