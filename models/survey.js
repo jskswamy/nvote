@@ -1,6 +1,8 @@
-var Sequelize = require("sequelize"),
+var Sequelize = require('sequelize'),
     database = require('../lib/database'),
-    sequelize = database.get_sequelize();
+    sequelize = database.get_sequelize(),
+    events = require("events"),
+    eventEmitter = new events.EventEmitter();
 
 Survey = sequelize.define('survey', {
   name: Sequelize.STRING,

@@ -1,5 +1,4 @@
-var vote = require('./models/vote'),
-    database = require('./lib/database'),
+var database = require('./lib/database'),
     sequelize = database.get_sequelize();
 
 namespace('db', function() {

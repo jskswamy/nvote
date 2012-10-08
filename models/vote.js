@@ -1,4 +1,4 @@
-var Sequelize = require("sequelize"),
+var Sequelize = require('sequelize'),
     database = require('../lib/database'),
     sequelize = database.get_sequelize(),
     events = require("events"),
@@ -18,13 +18,13 @@ exports.build = function(params) {
 };
 
 exports.create = function(params) {
-  Vote.create(params);
+  Vote.create(params); 
   return eventEmitter.emit('created');
 };
 
 exports.get_trending_votes = function(fn) {
-  return Vote.findAll({
-    limit: 100,
-         order: 'id DESC'
-  }).success(fn);
+  return sequelize.query('SELECT * FROM votes WHERE votes.createdAt = (SELECT MAX(v2.createdAt) FROM votes v2 WHERE v2.ip_addr = votes.ip_addr)', null, {raw: true})
+  .on('success', function(votes){
+    console.log(votes);
+  });
 };

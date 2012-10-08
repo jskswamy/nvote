@@ -39,13 +39,14 @@ var PieChart = {
 };
 
 function bindRefresh() {
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect('/');
   socket.on('votes', refresh);
 }
 
 function refresh(data) {
   var plusOne = 0, minusOne = 0;
   $(data).each(function(index, vote) {
+
     if (vote.mood) plusOne++;
     else minusOne++;
   });
@@ -86,7 +87,7 @@ var Smiley = {
     this.svg.append("path").attr("id","smile").attr("fill","none").attr("stroke","black").attr("stroke-width","3").attr("d", "M -75, 87 a 12, 10, 0 0, 0 150, 0");
   },
   updateSmile: function(moodData) {
-    var happyPercentile = ((moodData.plusOne - moodData.minusOne) / 10);
+    var happyPercentile = ((moodData.plusOne - moodData.minusOne));
     console.log(moodData);
     console.log(happyPercentile);
     this.svg.select("#smile").attr("d","M -75, 87 a 12," + happyPercentile + ", 0 0, 0 150, 0");
