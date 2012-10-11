@@ -2,7 +2,8 @@ var pieHandler = null;
 
 $(function() {
   //PieChart.init([1,1]);
-  Smiley.init();
+  // Smiley.init();
+  Cluster.init();
   bindRefresh();
 });
 
@@ -44,13 +45,14 @@ function bindRefresh() {
 }
 
 function refresh(data) {
-  var plusOne = 0, minusOne = 0;
-  $(data).each(function(index, vote) {
+  // var plusOne = 0, minusOne = 0;
+  Cluster.updateCluster(data);
+  // $(data).each(function(index, vote) {
 
-    if (vote.mood) plusOne++;
-    else minusOne++;
-  });
-  Smiley.updateSmile({plusOne: plusOne, minusOne: minusOne})
+    // if (vote.mood) plusOne++;
+    // else minusOne++;
+  // });
+  // Smiley.updateSmile({plusOne: plusOne, minusOne: minusOne})
   //PieChart.refresh([plusOne, minusOne]);
 }
 
@@ -91,5 +93,41 @@ var Smiley = {
     console.log(moodData);
     console.log(happyPercentile);
     this.svg.select("#smile").attr("d","M -75, 87 a 12," + happyPercentile + ", 0 0, 0 150, 0");
+  }
+}
+var Cluster = {
+  init: function() {
+    this.padding = 0;
+    this.w = 800;
+    this.h = 600;
+    this.fill = d3.scale.category10()
+    this.cluster = d3.layout.force()
+                    .nodes([])
+                    .links([])
+                    .gravity(0)
+                    .size([this.w, this.h]);
+    this.svg = this._getSVGHandle();
+  },
+  _getSVGHandle: function() {
+    return d3.select("div.pie_chart").append("svg:svg").attr("width", this.w).attr("height", this.h);
+  },
+  updateCluster: function(json) {
+    console.log(json);
+    var node = this.svg.selectAll("circle.node")
+                .data(json)
+                .enter().append("svg:circle")
+                .attr("class", "node")
+                .attr("cx", function(d) { 
+                  return(d.mood ? 100 : 400); 
+               })
+                .attr("cy", function(d) {
+                  Cluster.padding = Cluster.padding + 16;
+                  return(Cluster.padding + 200); 
+                })
+                .attr("r", 8)
+                .style("fill", function(d) { return Cluster.fill(d.id); })
+                .style("stroke", function(d) { return d3.rgb(Cluster.fill(d.id)).darker(2); })
+                .style("stroke-width", 1.5)
+                .call(this.cluster.drag);
   }
 }
