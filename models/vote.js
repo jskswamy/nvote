@@ -23,8 +23,5 @@ exports.create = function(params) {
 };
 
 exports.get_trending_votes = function(fn) {
-  return sequelize.query('SELECT * FROM votes WHERE votes.createdAt = (SELECT MAX(v2.createdAt) FROM votes v2 WHERE v2.ip_addr = votes.ip_addr)', null, {raw: true})
-  .on('success', function(votes){
-    console.log(votes);
-  });
+  return sequelize.query('SELECT * FROM votes WHERE votes.createdAt = (SELECT MAX(v2.createdAt) FROM votes v2 WHERE v2.ip_addr = votes.ip_addr)', Vote).success(fn);
 };
