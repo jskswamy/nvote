@@ -18,8 +18,9 @@ exports.build = function(params) {
 };
 
 exports.create = function(params) {
-  Vote.create(params); 
-  return eventEmitter.emit('created');
+  return Vote.create(params).success(function(success){
+    eventEmitter.emit('created');
+  });
 };
 
 exports.get_trending_votes = function(fn) {

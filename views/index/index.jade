@@ -3,8 +3,9 @@ extends ../layout
 block scripts
   script(type='text/javascript', src='/socket.io/socket.io.js')
   script(type='text/javascript', src='/javascripts/d3.v2.min.js')
-  script(type='text/javascript', src='/javascripts/app.js')
 
 block content
-  h1 People's Mood
-  div.pie_chart
+  h3 Express Your Mood
+    div.action
+        a.btn.btn-success.btn-large(href='/cast/1', style="margin-top: 10px; width: 80%;") Happy
+        a.btn.btn-danger.btn-large(href='/cast/0', style="margin-top: 10px; width: 80%;") Sad

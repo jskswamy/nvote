@@ -24,6 +24,7 @@ app.configure("development", function() {
 });
 
 app.get("/", routes.index);
+app.get("/current_mood", routes.mood);
 app.get("/cast/:mood", routes.cast.index);
 app.get("/trend", routes.cast.trend);
 app.get("/survey",routes.survey.index);

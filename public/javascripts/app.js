@@ -107,18 +107,18 @@ var Cluster = {
                     .gravity(0)
                     .size([this.w, this.h]);
     this.svg = this._getSVGHandle();
+    this.nodes = this._drawCluster([]);
   },
   _getSVGHandle: function() {
     return d3.select("div.pie_chart").append("svg:svg").attr("width", this.w).attr("height", this.h);
   },
-  updateCluster: function(json) {
-    console.log(json);
-    var node = this.svg.selectAll("circle.node")
+  _drawCluster: function(json) {
+    return this.svg.selectAll("circle.node")
                 .data(json)
                 .enter().append("svg:circle")
                 .attr("class", "node")
                 .attr("cx", function(d) { 
-                  return(d.mood ? 100 : 400); 
+                  return(d.mood ? 100 : 600); 
                })
                 .attr("cy", function(d) {
                   Cluster.padding = Cluster.padding + 16;
@@ -127,7 +127,28 @@ var Cluster = {
                 .attr("r", 8)
                 .style("fill", function(d) { return Cluster.fill(d.id); })
                 .style("stroke", function(d) { return d3.rgb(Cluster.fill(d.id)).darker(2); })
-                .style("stroke-width", 1.5)
-                .call(this.cluster.drag);
+                .style("stroke-width", 1.5);
+  },
+  updateCluster: function(json) {
+    console.log(json);
+    this.cluster.nodes(json).links([]).start();
+    node = this.svg.selectAll("circle.node")
+      .data(json, function(d) { return d.id; })
+      .style("fill", function(d) { Cluster.fill(d.id)});
+
+      node.enter().append("svg:circle")
+                .attr("class", "node")
+                .attr("cx", function(d) { 
+                  return(d.mood ? 100 : 600); 
+               })
+                .attr("cy", function(d) {
+                  Cluster.padding = Cluster.padding + 16;
+                  return(Cluster.padding + 200); 
+                })
+                .attr("r", 8)
+                .style("fill", function(d) { return Cluster.fill(d.id); })
+                .style("stroke", function(d) { return d3.rgb(Cluster.fill(d.id)).darker(2); })
+                .style("stroke-width", 1.5);
+    node.exit().remove();
   }
 }
